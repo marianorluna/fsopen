@@ -1,45 +1,45 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-// Desestructuramos el objeto, extrayendo las propiedades
-// Comentamos la forma normal, para ver la diferencia
-// const Title = (props) => {
-//  return <h1>{props.course}</h1>
-// }
-const Title = ({ course }) => {
-  // const {course} = props // esto directamente lo ponemos arriba
-  // const course = props.course // son equivalentes
-  return <h1>{course}</h1>
+
+const Title = (props) => {
+ return <h1>{props.course}</h1>
 }
+// Desestructuramos el objeto, extrayendo las propiedades
+// const Title = ({ course }) => {
+//// const {course} = props // esto directamente lo ponemos arriba
+//// const course = props.course // son equivalentes
+//// return <h1>{course.name}</h1>
+//// }
 // Incluso lo podríamos dejar en una sola línea
 // const Title = ({ course }) => <h1>{course}</h1>
 
-const Part = ({ part, exercises }) => {
+const Part = (props) => {
   return (
     <div>
       <p>
-        {part} {exercises}
+        {props.part} {props.exercises}
       </p>
     </div>
   )
 }
 
-const Content = ({ parts }) => {
+const Content = (props) => {
   return (
     <div>
-      <Part part={parts[0].name} exercises={parts[0].exercises}/>
-      <Part part={parts[1].name} exercises={parts[1].exercises}/>
-      <Part part={parts[2].name} exercises={parts[2].exercises}/>
+      <Part part={props.parts[0].name} exercises={props.parts[0].exercises}/>
+      <Part part={props.parts[1].name} exercises={props.parts[1].exercises}/>
+      <Part part={props.parts[2].name} exercises={props.parts[2].exercises}/>
     </div>
   )
 }
 
-const Total = ({ parts })=> {
+const Total = (props)=> {
   return (
     <div>
       <p>
         Number of exercises {
-        parts[0].exercises + parts[1].exercises + parts[2].exercises
+        props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises
         }
       </p>
     </div>
@@ -47,27 +47,29 @@ const Total = ({ parts })=> {
 }
 
 const App = () => {
-  const course = 'Half Stack application development'
-  const parts = [
-  {
-    name: 'Fundamentals of React',
-    exercises: 10
-  },
-  {
-    name: 'Using props to pass data',
-    exercises: 7
-  },
-  {
-    name: 'State of a component',
-    exercises: 14
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
   }
-  ]
 
   return (
     <div>
-      <Title course={course} />
-      <Content parts={parts} />
-      <Total parts={parts} />
+      <Title course={course.name} />
+      <Content parts={course.parts} />
+      <Total parts={course.parts} />
     </div>
   )
 }
